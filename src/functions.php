@@ -53,6 +53,22 @@ function _get_post_thumbnail($size = 'thumbnail', $class = 'thumb') {
     }
 }
 set_post_thumbnail_size(220, 140, true); // 图片宽度与高度
+
+// 屏蔽纯英文评论和纯日文
+function refused_english_comments($incoming_comment) {
+  $pattern = '/[一-龥]/u';
+  // 禁止全英文评论
+  if(!preg_match($pattern, $incoming_comment['comment_content'])) {
+    wp_die( "您的评论中必须包含汉字!" );
+  }
+  $pattern = '/[あ-んア-ン]/u';
+  // 禁止日文评论
+  if(preg_match($pattern, $incoming_comment['comment_content'])) {
+    wp_die( "评论禁止包含日文!" );
+  }
+  return( $incoming_comment );
+}
+add_filter('preprocess_comment', 'refused_english_comments');
 ?>
 <?php //控制分页页面，每个页面所显示的文章数量
 // function custom_posts_per_page($query){
@@ -328,7 +344,7 @@ add_action('after_wp_tiny_mce', 'add_button_mce');
 function add_button_mce($mce_settings) { 
 ?>
     <script type="text/javascript">
-        QTags.addButton( '注意', '注意', "<span class='beCareful'>", "</span>" );
+        QTags.addButton( '重点', '重点', "<span class='beCareful'>", "</span>" );
         QTags.addButton( '加密内容', '加密内容', "[secret key='123']", "[/secret]" );
         QTags.addButton( '视频', '视频', "[embed]", "[/embed]" );
         QTags.addButton( '登录可见', '登录可见', "[login_success]", "[/login_success]" );
@@ -398,7 +414,7 @@ add_action( 'add_security_question','register_form' );
 
 //添加百度是否收录(php baidu_record())
 function baidu_check($url){
-    $url='http://www.baidu.com/s?wd='.$url;
+    $url='https://www.baidu.com/s?wd='.$url;
     $curl=curl_init();
     curl_setopt($curl,CURLOPT_URL,$url);
     curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);

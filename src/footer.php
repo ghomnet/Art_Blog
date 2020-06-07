@@ -10,17 +10,6 @@
 
 <!-- 底部半透明遮盖层 -->
 <div class="footer-banner__navi">
-  <div class="js_banner_nav mod-banner_nav">
-    <a class="js_nav current" href="javascript:;"></a>
-    <a class="js_nav" href="javascript:;"></a>
-    <a class="js_nav" href="javascript:;"></a>
-    <a class="js_nav" href="javascript:;"></a>
-    <a class="js_nav" href="javascript:;"></a>
-    <a class="js_nav" href="javascript:;"></a>
-  </div>
-  <span class="mod-banner__nav-dot">
-    <canvas id="dotCanvas"></canvas>
-  </span>
 </div>
 
 <!-- 小飞机start -->
@@ -164,7 +153,7 @@
 
 <!-- <script type="text/javascript" color="0,0,255" opacity='0.7' zIndex="-1" count="99" src="/js/canvas-nest.min.js"></script> -->
 <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/jquery.lazyload.js"></script>
-<script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/video.js/video.min.js"></script>
+<script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/video/video.min.js"></script>
 <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/main_min.js"></script>
 
 <!-- 调用wordpress核心函数 -->

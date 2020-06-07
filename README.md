@@ -35,8 +35,7 @@
 
 |  网站名称 | 网站地址 | 
 | :----: | :----: | 
-| [爱看否](http://wordpress.ikfou.com) | http://wordpress.ikfou.com
-| [DCEP日志](http://www.dceplog.com) | www.dceplog.com
+| [前端笔记](http://younglee666.com/) | http://younglee666.com
 | [非常前端](http://moxiaofei.com) | www.moxiaofei.com 
 | [大川渝个人博客](https://www.dcydz.com) | www.dcydz.com
 | [青幽](http://moxiaofei.com) | http://moxiaofei.com
@@ -49,10 +48,12 @@
 | [PC再现](http://pczaixian.com) | http://www.pczaixian.com
 | [北漂程序员](http://blog.zoux.xin) | http://blog.zoux.xin
 | [郑鹏鑫博客](http://blog.quandaquan.cn) | http://blog.quandaquan.cn
+| [阿Q博客](http://qblog.org) | http://qblog.org
 | [苏州特个人博客](http://www.sutee.cn) | http://www.sutee.cn
 | [某小健博客](http://www.mouxj.com) | www.mouxj.com |
 
 <!-- | [Pets配资知识网](http://www.jing11.net) | www.jing11.net -->
+<!-- | [DCEP日志](http://www.dceplog.com) | www.dceplog.com -->
 <!-- | [屌丝写代码](http://www.uytools.com) | www.uytools.com  -->
 <!-- | [西狂部落阁](http://www.xikuang.ren) | www.xikuang.ren -->
 <!-- | [福利社](https://www.fulijs.net) | www.fulijs.net -->

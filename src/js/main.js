@@ -1,3 +1,7 @@
+/**
+ * @license
+ * 全局js
+ */
 $(function () {
     var domain_name = window.location.protocol + "//" + window.location.host;
     function speak(text) {
@@ -261,53 +265,42 @@ $(function () {
     var musicObj = null;
     var musicList = $(".nav ul.music-nav > li:not(.mod-header_music-icon)");
     $('.header').hover(function () {
-        $(this).css("z-index", "11"); 
+        $(this).css("z-index", "12");
     }, function () {
         //如果出现搜索的情况下，头部层级自然还是要比轮播高
-        if (!$(".site-search").is(":visible")) {
-            $(".header").css("z-index", "10"); //避免在正常时候下方轮播分割旋转时候被遮盖 
+        clearTimeout(time1);
+        if (!time2 && !$(".site-search").is(":visible")) {
+            time1 = setTimeout(() => {
+                //避免在正常时候下方轮播分割旋转时候被遮盖 
+                $(".header").css("z-index", "10");
+            }, 500);
         }
     })
-    $(".nav ul.music-nav > li:not(.mod-header_music-icon)").hover(function(event){
+    musicList.mouseenter(function () {
         clearTimeout(time2);
-        $(".header").css("z-index", "11"); 
-        $(this).find('.nav-min').css({
-            "opacity": "1",
-            "visibility": "visible",
-            "top": "49px"
-        }).parent('li').siblings('li').children('.nav-min').css({
-            "opacity": "0",
-            "visibility": "hidden",
-            "top": "70px"
-        });
-        $(this).siblings('li').children('.nav-min').css({
-            "opacity": "0",
-            "visibility": "hidden",
-            "top": "70px"
-        });
+        $(".header").css("z-index", "12");
+        $(".header-conter .nav-min").hide();
+        $(this).find('ul.nav-min').show()
         $index = $(this).index();
-        musicObj = $(".nav ul.music-nav > li:not(.mod-header_music-icon)").eq($index).find('audio');
+        musicObj = musicList.eq($index).find('audio');
         if (localStorage.getItem("off_y") == 1) {
             $(this).addClass("active").siblings('li').removeClass('active');
             musicObj.get(0).src = "/wp-content/themes/Art_Blog/music/nav_" + parseInt($index + 1) + ".mp3";
         } else {
             musicObj.get(0).src = "";
         }
-        event.stopPropagation();
-    },function(){
+    })
+    musicList.mouseleave(function () {
+        $(this).removeClass('active');
         clearTimeout(time2);
-        if (!$(".site-search").is(":visible")) {
-            $(".header").css("z-index", "10"); //避免在正常时候下方轮播分割旋转时候被遮盖 
-        }
         time2 = setTimeout(() => {
-            $(this).removeClass("active");
-            $(".header-conter .nav-min").css({
-                "opacity": "0",
-                "visibility": "hidden",
-                "top": "70px"
-            });
-        }, 100);
-    });
+            $(".header-conter .nav-min").hide();
+            //避免在正常时候下方轮播分割旋转时候被遮盖 
+            if (!$(".site-search").is(":visible")) {
+                $(".header").css("z-index", "10");
+            }
+        }, 500);
+    })
 
     function musicdown(number) {
         if (number <= musicList.length) {
@@ -320,9 +313,9 @@ $(function () {
     $(document).keydown(function (event) {
         if (localStorage.getItem("off_y") == 1) {
             //a65 s83 d68 f70 g71 h72 j74 k75 l76
-            var keyArr = [65,83,68,70,71,72,74,75,76]
+            var keyArr = [65, 83, 68, 70, 71, 72, 74, 75, 76]
             var _index = keyArr.indexOf(event.keyCode)
-            if(_index >= 0){
+            if (_index >= 0) {
                 musicdown(_index + 1)
             }
         }
@@ -432,10 +425,14 @@ $(function () {
 
     //移动端禁止侧边导航上下滚动start
     $(".os-herder,.site-search").on("touchmove", function (event) {
-        //event.stopPropagation();
         event.preventDefault();
     });
     //移动端禁止侧边导航上下滚动end
+
+    //子元素允许局部滚动
+    $('.os-herder ul.slide-left li .slide_slect').on('touchmove', function (event) {
+        return true;
+    }, false);
 
     //禁止ios11自带浏览器缩放功能start
     document.addEventListener('touchstart', function (event) {
@@ -533,7 +530,7 @@ $(function () {
         } else {
             ! function (e, t, a) {
                 function r() {
-                    for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y-- ,
+                    for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[e].y--,
                         s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x + "px;top:" + s[e]
                             .y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e].scale +
                         ") rotate(45deg);background:" + s[e].color + ";z-index:99999");
@@ -772,10 +769,92 @@ $(function () {
     //友情链接随机数颜色end
 
     //视频播放start
-    if ($('#my-video').length) {
-        var delSetInterval = null; //定时器
-        //var ISvideo = false; //当前是否全屏
+    if ($("#my-video").length) {
+        // var delSetInterval = null; //定时器
         var myPlayer = videojs('my-video');
+        // videojs.addLanguage("zh-CN",{
+        //     "Play": "播放",
+        //     "Pause": "暂停",
+        //     "Current Time": "当前时间",
+        //     "Duration": "时长",
+        //     "Remaining Time": "剩余时间",
+        //     "Stream Type": "媒体流类型",
+        //     "LIVE": "直播",
+        //     "Loaded": "加载完毕",
+        //     "Progress": "进度",
+        //     "Fullscreen": "全屏",
+        //     "Non-Fullscreen": "退出全屏",
+        //     "Mute": "静音",
+        //     "Unmute": "取消静音",
+        //     "Playback Rate": "播放速度",
+        //     "Subtitles": "字幕",
+        //     "subtitles off": "关闭字幕",
+        //     "Captions": "内嵌字幕",
+        //     "captions off": "关闭内嵌字幕",
+        //     "Chapters": "节目段落",
+        //     "Close Modal Dialog": "关闭弹窗",
+        //     "Descriptions": "描述",
+        //     "descriptions off": "关闭描述",
+        //     "Audio Track": "音轨",
+        //     "You aborted the media playback": "视频播放被终止",
+        //     "A network error caused the media download to fail part-way.": "网络错误导致视频下载中途失败。",
+        //     "The media could not be loaded, either because the server or network failed or because the format is not supported.": "视频因格式不支持或者服务器或网络的问题无法加载。",
+        //     "The media playback was aborted due to a corruption problem or because the media used features your browser did not support.": "由于视频文件损坏或是该视频使用了你的浏览器不支持的功能，播放终止。",
+        //     "No compatible source was found for this media.": "无法找到此视频兼容的源。",
+        //     "The media is encrypted and we do not have the keys to decrypt it.": "视频已加密，无法解密。",
+        //     "Play Video": "播放视频",
+        //     "Close": "关闭",
+        //     "Modal Window": "弹窗",
+        //     "This is a modal window": "这是一个弹窗",
+        //     "This modal can be closed by pressing the Escape key or activating the close button.": "可以按ESC按键或启用关闭按钮来关闭此弹窗。",
+        //     ", opens captions settings dialog": ", 开启标题设置弹窗",
+        //     ", opens subtitles settings dialog": ", 开启字幕设置弹窗",
+        //     ", opens descriptions settings dialog": ", 开启描述设置弹窗",
+        //     ", selected": ", 选择",
+        //     "captions settings": "字幕设定",
+        //     "Audio Player": "音频播放器",
+        //     "Video Player": "视频播放器",
+        //     "Replay": "重播",
+        //     "Progress Bar": "进度小节",
+        //     "Volume Level": "音量",
+        //     "subtitles settings": "字幕设定",
+        //     "descriptions settings": "描述设定",
+        //     "Text": "文字",
+        //     "White": "白",
+        //     "Black": "黑",
+        //     "Red": "红",
+        //     "Green": "绿",
+        //     "Blue": "蓝",
+        //     "Yellow": "黄",
+        //     "Magenta": "紫红",
+        //     "Cyan": "青",
+        //     "Background": "背景",
+        //     "Window": "视窗",
+        //     "Transparent": "透明",
+        //     "Semi-Transparent": "半透明",
+        //     "Opaque": "不透明",
+        //     "Font Size": "字体尺寸",
+        //     "Text Edge Style": "字体边缘样式",
+        //     "None": "无",
+        //     "Raised": "浮雕",
+        //     "Depressed": "压低",
+        //     "Uniform": "均匀",
+        //     "Dropshadow": "下阴影",
+        //     "Font Family": "字体库",
+        //     "Proportional Sans-Serif": "比例无细体",
+        //     "Monospace Sans-Serif": "单间隔无细体",
+        //     "Proportional Serif": "比例细体",
+        //     "Monospace Serif": "单间隔细体",
+        //     "Casual": "舒适",
+        //     "Script": "手写体",
+        //     "Small Caps": "小型大写字体",
+        //     "Reset": "重启",
+        //     "restore all settings to the default values": "恢复全部设定至预设值",
+        //     "Done": "完成",
+        //     "Caption Settings Dialog": "字幕设定视窗",
+        //     "Beginning of dialog window. Escape will cancel and close the window.": "开始对话视窗。离开会取消及关闭视窗",
+        //     "End of dialog window.": "结束对话视窗"
+        //   });          
 
         //播放失败时候处理
         var errVideo = document.getElementById('my-video_html5_api');
@@ -788,42 +867,42 @@ $(function () {
             })
         };
 
-        //var howMuchIsDownloaded = 0; //初始化缓冲百分比
-        var eleFull = document.querySelector("#my-video"); //视频对象
+        // //var howMuchIsDownloaded = 0; //初始化缓冲百分比
+        // var eleFull = document.querySelector("#my-video"); //视频对象
 
-        //视频全屏方法
-        var runPrefixMethod = function (element, method) {
-            var usablePrefixMethod;
-            ["webkit", "moz", "ms", "o", ""].forEach(function (prefix) {
-                if (usablePrefixMethod) return;
-                if (prefix === "") {
-                    // 无前缀，方法首字母小写
-                    method = method.slice(0, 1).toLowerCase() + method.slice(1);
+        // //视频全屏方法
+        // var fullScreen = function (element, method) {
+        //     var usablePrefixMethod;
+        //     ["webkit", "moz", "ms", "o", ""].forEach(function (prefix) {
+        //         if (usablePrefixMethod) return;
+        //         if (prefix === "") {
+        //             // 无前缀，方法首字母小写
+        //             method = method.slice(0, 1).toLowerCase() + method.slice(1);
 
-                }
-                var typePrefixMethod = typeof element[prefix + method];
-                if (typePrefixMethod + "" !== "undefined") {
-                    if (typePrefixMethod === "function") {
-                        usablePrefixMethod = element[prefix + method]();
-                    } else {
-                        usablePrefixMethod = element[prefix + method];
-                    }
-                }
-            });
-            return usablePrefixMethod;
-        };
-        if (typeof window.screenX === "number") {
-            eleFull.addEventListener("dblclick", function () {
-                if (runPrefixMethod(document, "FullScreen") || runPrefixMethod(document, "IsFullScreen")) {
-                    runPrefixMethod(document, "CancelFullScreen");
-                    this.title = this.title.replace("退出", "");
-                } else if (runPrefixMethod(this, "RequestFullScreen")) {
-                    this.title = this.title.replace("点击", "点击退出");
-                }
-            });
-        } else {
-            alert("爷，现在是年轻人的时代，您就暂且休息去吧~~");
-        }
+        //         }
+        //         var typePrefixMethod = typeof element[prefix + method];
+        //         if (typePrefixMethod + "" !== "undefined") {
+        //             if (typePrefixMethod === "function") {
+        //                 usablePrefixMethod = element[prefix + method]();
+        //             } else {
+        //                 usablePrefixMethod = element[prefix + method];
+        //             }
+        //         }
+        //     });
+        //     return usablePrefixMethod;
+        // };
+        // if (typeof window.screenX === "number") {
+        //     eleFull.addEventListener("dblclick", function () {
+        //         if (fullScreen(document, "FullScreen") || fullScreen(document, "IsFullScreen")) {
+        //             fullScreen(document, "CancelFullScreen");
+        //             this.title = this.title.replace("退出", "");
+        //         } else if (fullScreen(this, "RequestFullScreen")) {
+        //             this.title = this.title.replace("点击", "点击退出");
+        //         }
+        //     });
+        // } else {
+        //     alert("爷，现在是年轻人的时代，您就暂且休息去吧~~");
+        // }
 
         //初始化加载需要先缓冲到50%+才会播放，避免高清视频卡顿
         /*delSetInterval = setInterval( function() {
@@ -837,7 +916,6 @@ $(function () {
         */
         //当视频播放完成后，重新加载渲染，随时准备第二次重播
         myPlayer.on("ended", function () {
-            //alert("视频已播放完成");
             myPlayer.play();
             setTimeout(function () {
                 myPlayer.pause();
