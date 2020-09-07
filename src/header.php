@@ -26,12 +26,12 @@
 		<div class="header-conter">
 			<nav class="nav">
 					<a href="/" class="t-logo" id="Logo">
-							<img src="<?php echo get_option('weipxiu_options')['logo']; ?>" onerror="this.src='https:\/\/www.weipxiu.com/wp-content/uploads/2019/06/weipxiu_logo_2.png';">
+							<img src="<?php echo get_option('weipxiu_options')['logo']; ?>">
 					</a>
 					<div class="nav-left"></div>
 					<div class="brand">
 					<p>关注前端开发</p>
-					<p>Html5、Vue、Node、Flutter</p>
+					<p>Html5、Vue、Node、Koa</p>
 				</div>
 				<?php 
 					// 列出顶部导航菜单，只列出一级菜单

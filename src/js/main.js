@@ -133,7 +133,7 @@ $(function () {
                 }
             });
     } else {
-        layer.alert('爷，现在都什么时代了，你还在用这么土的浏览器~~', {
+        layer.alert('亲，现在都什么时代了，你还在用这么土的浏览器~~', {
             skin: 'layui',
             title: "请更换浏览器",
             closeBtn: 0,
@@ -526,7 +526,7 @@ $(function () {
         }
         //点击页面出现爱心
         if (!!window.ActiveXObject || "ActiveXObject" in window) {
-            console.log("天啦，偶买噶，你竟然还在用IE？")
+            console.log("天啦，偶买噶，您竟然还在用IE？")
         } else {
             ! function (e, t, a) {
                 function r() {

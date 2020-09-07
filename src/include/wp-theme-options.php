@@ -21,7 +21,6 @@ function themeoptions_page() {
       <li class="nav-list">SEO</li>
       <li class="nav-list">图片</li>
       <li class="nav-list">社交</li>
-      <!-- <li class="nav-list">自定义代码</li> -->
     </ul>
     <form method="post" action="">
       <input type="hidden" name="update_themeoptions" value="true">
@@ -199,7 +198,7 @@ function themeoptions_page() {
         </div>
 
         <div class="row clearfix">
-          <label class="fl left-wrap">侧边栏视频</label>
+          <label class="fl left-wrap">侧边栏视频：</label>
           <div class="fr right-wrap">
             <label for="video_on">开</label>
             <input
@@ -264,7 +263,7 @@ function themeoptions_page() {
         <div class="row clearfix">
           <label for="sidebar-notice" class="fl left-wrap">侧边栏公告：</label>
           <div class="fr right-wrap">
-            <textarea id="sidebar-notice" name="sidebar-notice" rows="5" cols="100"><?php echo $a_options['sidebar_notice']; ?></textarea>
+            <textarea id="sidebar-notice" name="sidebar-notice" rows="2" cols="100"><?php echo $a_options['sidebar_notice']; ?></textarea>
           </div>
         </div>
 
@@ -309,13 +308,13 @@ function themeoptions_page() {
       <!-- 内容二 SEO -->
       <div class="content-wrap content2">
         <div class="row clearfix">
-          <label for="keywords" class="fl left-wrap">首页关键词(keyword)</label>
+          <label for="keywords" class="fl left-wrap">网站关键词：</label>
           <div class="fr right-wrap">
             <textarea id="keywords" name="keywords" rows="8" cols="100"><?php echo $a_options['keywords'] ?></textarea>
           </div>
         </div>
         <div class="row clearfix">
-          <label for="description class=" fl left-wrap"">首页描述(describe)</label>
+          <label for="description" class="fl left-wrap">网站描述：</label>
           <div class="fr right-wrap">
             <textarea id="description" name="description" rows="8" cols="100"><?php echo $a_options['description'] ?></textarea>
           </div>

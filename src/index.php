@@ -174,10 +174,10 @@
 							<a href="https://wpa.qq.com/msgrd?v=3&uin=343049466&site=qq&menu=yes" target="_blank" class="top-tip" title="加QQ为好友"><i class="iconfont icon-qq"></i>会话</a>
 						</li>
 						<li class="qq">
-							<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=4BemYKg" rel="nofollow" class="top-tip" title="加入web前端QQ群"><i class="iconfont icon-qqqun"></i>Q群</a>
+							<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=aU2c7W76" rel="nofollow" class="top-tip" title="加入web前端QQ群"><i class="iconfont icon-qqqun"></i>Q群</a>
 						</li>
 						<li class="email">
-							<a href="mailto:<?php echo get_option('weipxiu_options')['QQ-number']; ?>@qq.com.com" target="_blank" rel="nofollow" class="top-tip" title="给我发送qq邮件"><i class="iconfont icon-youxiang"></i>邮件</a>
+							<a href="mailto:<?php echo get_option('weipxiu_options')['QQ-number']; ?>@qq.com" target="_blank" rel="nofollow" class="top-tip" title="给我发送qq邮件"><i class="iconfont icon-youxiang"></i>邮件</a>
 						</li>
 						<li class="weixin">
 							<a href="javascript:;" target="_blank" rel="nofollow" class="top-tip" title="关注微信"><i class="iconfont icon-weixin"></i>微信</a>
@@ -347,7 +347,7 @@
 <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/xfg_banner/banner-effect.js"></script>
 <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/index_min.js"></script>
 <script type="text/javascript">
-if(!"<?php bloginfo('template_url'); ?>".includes('wp-content/themes/Art_Blog')){
+if("<?php bloginfo('template_url'); ?>".indexOf('wp-content/themes/Art_Blog') == -1){
 		layer.alert('Sorry，当前主题安装路径不正确，详情点击确认查看主题使用说明！',{
 		skin: 'layui',
 		title:"提示",

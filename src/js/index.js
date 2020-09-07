@@ -30,13 +30,13 @@ $(function () {
 
                 var popNotice = function () {
                     if (Notification.permission == "granted") {
-                        var notification = new Notification("官方提示：", {
-                            body: '欢迎点击加入"Vue.js3.0技术栈"互相学习、交流！',
+                        var notification = new Notification("友情提示：", {
+                            body: '欢迎点击立即加入"Vue.js3.0技术栈"群互相学习、交流！',
                             icon: '/wp-content/themes/Art_Blog/images/tishi.png'
                         })
 
                         notification.onclick = function () {
-                            window.open("https://jq.qq.com/?_wv=1027&k=4BemYKg")
+                            window.open("https://jq.qq.com/?_wv=1027&k=aU2c7W76")
                             notification.close();
                         }
                         layer.ready(function(){
@@ -67,7 +67,7 @@ $(function () {
         if (domain_name.indexOf('weipxiu.com') != '-1') {
             setTimeout(function () {
                 set_desktop();
-            }, 3000);
+            }, 2000);
         }
         // 桌面提醒功能
 
