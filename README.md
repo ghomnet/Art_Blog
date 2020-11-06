@@ -1,7 +1,7 @@
 <p align="center">
   <img width="160" height="55" src="https://www.weipxiu.com/wp-content/uploads/2019/06/weipxiu_logo_2.png">
 </p>
-<!-- 制作下面标签https://shields.io/#/ -->
+<!-- 下列标签如何制作？https://shields.io/#/ -->
 <p align="center">
   <a href="https://wordpress.org/">
     <img src="https://img.shields.io/badge/wordPress-5.2.3-brightgreen.svg" alt="wordPress">
@@ -26,101 +26,78 @@
   </a>
 </p>
 
-一款基于Js+jquery2.1.4+H5/CSS3开发，遵循黄金分割定律，把控每个元素每一个像素差的wordpress主题v2.6.1，[主题介绍](https://www.weipxiu.com/about)
-
-## 主题后台配置预览
-![avatar](https://www.weipxiu.com/wp-content/themes/Art_Blog/images/wp-theme-options.png)
-
-## 哪些网站在使用(据百度受访问域名不完全统计，并非后门)
-
-|  网站名称 | 网站地址 | 
-| :----: | :----: | 
-| [故城县历史](http://www.gaojibo.com/) | http://www.gaojibo.com
-| [肖文杰个人博客](https://www.goodjayson.com/) | https://www.goodjayson.com
-| [前端笔记](http://younglee666.com/) | http://younglee666.com
-| [非常前端](http://moxiaofei.com) | www.moxiaofei.com 
-| [大川渝个人博客](https://www.dcydz.com) | www.dcydz.com
-| [青幽](http://moxiaofei.com) | http://moxiaofei.com
-| [智慧博客网](https://www.llg.design) | www.llg.design 
-| [开源NetCore](http://www.netcore.pub) | http://netcore.pub
-| [狗蛋博客](https://www.xiaole.biz) | https://www.xiaole.biz
-| [海诗查题](https://www.bswhs.cn) | https://www.bswhs.cn  
-| [北漂程序员](http://blog.zoux.xin) | http://blog.zoux.xin
-| [苏州特个人博客](http://www.sutee.cn) | http://www.sutee.cn
-| [某小健博客](http://www.mouxj.com) | www.mouxj.com |
+一款精美绝伦的wordPress开源艺术主题，历时四年时光洗礼，每段代码皆不忘初心，炫彩夺目奢华外表的同时，更有一颗懂你的心，[下载安装](https://github.com/weipxiu/Art_Blog/tags)
 
 ## 如何使用它
 
-I、本项目采用gulp自动化构建，推荐通过git克隆到本地，然后运行`npm install`安装依赖，接着运行npm run build即可压缩打包整个项目到`dist`文件夹（显然，这一切需要你电脑安装了Node.js以及git工具，node版本控制在v8.x为宜）。当然，如不需要打包压缩代码等一系列工具功能可直接下载即可，同样找到项目文件的dist目录，里面即是已打包好的主题源码
+I、方式一：直接下载项目，找到项目文件的Art_Blog.zip压缩包，即是已打包好的主题源码，通过后台主题上传，启用主题即可。方式二：将项目中dist文件夹下Art_Blog整个`文件夹`上传到线上：`/根目录/wp-content/themes/`目录下，启用主题，`推荐使用方式二`
 
-II、将dist文件名命名为`Art_Blog`(这是必须的)，将整个`文件夹`上传到线上：`/htdocs/wp-content/themes/`目录下。也可以将改好名字的Art_Blog文件夹压缩成`Zip文件`通过后台主题上传，最后后台启用主题
+II、当然，本项目采用gulp自动化构建，推荐通过git克隆到本地，电脑全局安装gulp，然后运行`npm install`安装依赖，接着运行npm run build即可压缩打包整个项目到`dist`文件夹（显然，这一切需要你电脑安装了Node.js以及git工具，node版本控制在v8.x为宜），dist里的文件就是Art_Blog.zip里的文件
 
-III、运行环境条件：虚拟主机/云主机环境选优先用Apache、wordPress版本≥4.6，≥5.3服务器php版本≤php7.2，如果出现报错，请尝试切换php版本，[阿里云虚拟主机升级php7.x报错处理](https://www.weipxiu.com/2909.html)，注意：[请尽可能使用云服务器而不是虚拟主机](https://www.weipxiu.com/3246.html)
+III、运行环境条件：1、优先采用云服务器而不是虚拟主机，2、wordPress版本≥4.0，服务器php版本≥5.6，3、如果出现意外报错，可尝试切换php版本，[论一个网站服务器性能重要性](https://www.weipxiu.com/3246.html)
 
-IV、启用唯品秀Art_Blog主题后，在设置>常规中设置自己网站标题、副标题、邮箱等信息，然后到外观>唯品秀主题设置，设置站点域名地址、公告、底部等信息
+IV、更多详细教程点击：[主题使用教程](https://www.weipxiu.com/3355.html)；文档枯燥？[教程视频](https://pan.baidu.com/s/1WdiCn__A6xQC3V9ddRSN6g)，`4drw`
 
-V、在后台>外观>菜单中管理你的导航栏
+V、主题开源，唯一支持作者的方式是下方打赏[支付宝/微信]，您的认可与支持将是我前进的最大动力！
+<p align="center">
+<img src="https://www.weipxiu.com/wp-content/uploads/2019/04/alipay.png" width="150"><img src="https://www.weipxiu.com/wp-content/uploads/2019/04/weixin.png" width="150">
+</p>
 
-VI、更多详细教程点击：[唯品秀前端技术博客主题使用教程](https://www.weipxiu.com/3355.html)；文档枯燥还是不知道说的啥？[简洁教程视频链接](https://pan.baidu.com/s/1WdiCn__A6xQC3V9ddRSN6g)，`4drw`
-
-Ⅶ、如若喜欢，请多多打赏，您的认可与支持将是我前进的最大动力！
-
-![avatar](https://www.weipxiu.com/wp-content/themes/Art_Blog/images/zhiwei.png)
+## 主题后台配置预览
+![avatar](https://www.weipxiu.com/wp-content/themes/Art_Blog/images/wp_theme_config.png)
 
 ## 碎言碎语
-
 
 I、wordPress主题制作有特别要求，例如主题根目录必须存在header.php、index.php、footer.php、style.css，否则主题视为"不完整"，无法安装。
 因此不用觉得某些文件摆放不合理，存在即有意义
 
 II、为了用户最佳浏览体验，该主题对≤IE8作了屏蔽跳转，≥IE9版本可能无法完整展示CSS3效果，但会尽量兼容到不影响阅读
 
-III、基于css文件作了根据终端分割，所以你会看到主题目录dist>css文件夹中有style-ios.css、style-ipd.css两个文件，没错，三端样式完全独立，不重用，有利有弊，不予置评
+III、CSS文件基于终端做分割，所以你会看到主题目录dist>css文件夹中有style-pc.css、style-ios.css、style-ipd.css两个文件，没错，三端样式完全独立，不重用，不过你完全不用过分担心，打包后多端样式会合并压缩，代价没你想象的那么大，有利有弊，不予置评
 
-IV、源码开放供大家使用并修改，但在使用过程中底部请保留"唯品秀"版权说明，即：在footer.php源码中请不要去掉：<p>本站主题由<a href="https://www.weipxiu.com/" class="highlight">WEIPXIU.COM</a>免费提供</p>
+IV、源码开放供大家使用并修改，但在使用过程中底部请保留"唯品秀"版权说明，即：在footer.php源码中请不要去掉：<p>本站主题由<a href="https://www.weipxiu.com" class="highlight">WEIPXIU.COM</a>免费提供</p>
+
+V、主题不定期优化，如若在使用过程中出现问题自己无法解决可直接与我联系，免费在线技术支持QQ:343049466，微信同号，加好友请备注
 
 ## 项目文件说明
 ``` bash
 │  page-time.php    //穿梭机（单页）
 │  page-about.php   //关于博客（单页）
 │  page-message.php    //碎言碎语（单页）
-│  page-reminder.php   //低版本浏览器重定向
-│  category.php   //通用列表模板
-│  comments.php   //评论模块
+│  page-reminder.php   //低版本浏览器落地页
+│  category.php   //通用文章列表模板
+│  comments.php   //评论模板
 │  favicon.ico  //网页浏览器标签icon
-│  footer.php  //公共底部
 │  functions.php  //主题核心函数
 │  header.php  //公共头部
-│  index.html  //测试页面
+│  footer.php  //公共底部
+│  common.php  //公共引入文件（js、css）
+│  index.html  //测试页面（忽略）
 │  index.php   //首页
 │  page.php    //通用单页模板
-│  screenshot.png //wordpress主题展示图片
+│  screenshot.png //wordpress主题展示图
 │  search.php  //搜索模板
 │  sidebar.php    //右侧栏目
 │  single.php  //文章详情
-│  style.css   //PC端样式
-│  thanks.php  //特别鸣谢（单页）
+│  style.css   //主题必备描述文件
 │  theme-options.php  //主题后台配置
 │  
 ├─css
-│      PingFangSC-Regular.woff   //字体文件
-│      sf-pro-display_medium.woff2
-│      sf-pro-display_regular.woff2
-│      sf-pro-display_semibold.woff2
-│      sf-pro-text_bold.woff2
-│      sf-pro-text_regular.woff2
-│      sf-pro-text_semibold.woff2
-│      style-ios.css    //手机端样式
-│      style-ipd.css    //ipd平板样式
-│      swiper.min.css   //移动端轮播swiper样式
-│      video-js.css    //视频插件样式     
-│          
-├─images    //公共图片资源
+│      main.css    //多端全局 
+│      style-pc.css    //PC端
+│      style-ios.css    //手机端
+│      style-ipd.css    //ipd端
+│      swiper.min.css   //移动端轮播
+│      video-js.css    //视频插件     
+│   
+├─font 
+│      sf-pro-text_regular.woff2 //字体包 
+│ 
+├─images  //公共图片资源（含表情包）
 │      
 ├─js
 │  │  ajax_wordpress.js    //分页ajax刷新
-│  │  canvas-nest.min.js //canvas背景图插件
-│  │  date.js  //时光机数据
+│  │  canvas-nest.min.js   //canvas背景图插件
 │  │  index.js    //整个网站全局js
 │  │  javascript.js  //只针对首页js文件
 │  │  jquery-2.1.4.min.js // 公共js库
@@ -129,17 +106,29 @@ IV、源码开放供大家使用并修改，但在使用过程中底部请保留
 │  │  
 │  ├─video.js 
 │  │      video.min.js //视频插件
-│  │      videojs-ie8.min.js
-│  │      zh-CN.js
-│  │      zh-CN.json
 │  │      
 │  └─xfg_banner
 │          banner-effect.js //PC端首页banner
-│          banner.js
-│          effect.js
-│          jquery.min.js
-│          utils.js
 │          
-└─music  //导航音频文件
+└─music  //3D导航音频文件
  ```       
 
+
+## 哪些网站在使用(据百度受访问域名不完全统计，并非后门)
+
+|  网站名称 | 网站地址 | 
+| :----: | :----: | 
+| [张峰博客](http://www.feng01.top/) | http://www.feng01.top
+| [枯痕博客](https://www.xiaole.biz/) | https://www.xiaole.biz
+| [故城县历史](http://www.gaojibo.com/) | http://www.gaojibo.com
+| [北漂程序员](https://blog.zoux.xin/) | https://blog.zoux.xin
+| [小初博客](http://youerdianxian.com/) | http://youerdianxian.com
+| [前端笔记](http://younglee666.com/) | http://younglee666.com
+| [非常前端](http://moxiaofei.com) | www.moxiaofei.com 
+| [大川渝个人博客](https://www.dcydz.com) | www.dcydz.com
+| [青幽](http://moxiaofei.com) | http://moxiaofei.com
+| [智慧博客网](https://www.llg.design) | www.llg.design 
+| [开源NetCore](http://www.netcore.pub) | http://netcore.pub
+| [狗蛋博客](https://www.xiaole.biz) | https://www.xiaole.biz
+| [苏州特个人博客](http://www.sutee.cn) | http://www.sutee.cn
+| [某小健博客](http://www.mouxj.com) | www.mouxj.com |
