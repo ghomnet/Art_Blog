@@ -161,21 +161,19 @@
                     $(".nav ul.music-nav > li").addClass("on");
                     $(".nav ul.music-nav > li").removeClass("off");
                     localStorage.setItem("off_y", 1);
-                    layer.msg("全站音频已开启~", {
+                    layer.msg("菜单音乐已开启~", {
                         time: 2000 //2秒关闭（如果不配置，默认是3秒）
                     }, function () {
                         layer.msg("无需鼠标，导航音乐键盘A-K也可以体验哦~~");
                     });
-                    that.readingAloud("全站音频已开启~")
                 } else {
                     $(this).removeClass("hover");
                     $('.nav ul.music-nav li').addClass('off');
                     $('.nav ul.music-nav li').removeClass('on');
                     localStorage.setItem("off_y", 0);
-                    layer.msg('全站音频已关闭，期待您的下次体验！', {
+                    layer.msg('菜单音乐已关闭，期待您的下次体验！', {
                         time: 4000
                     });
-                    that.readingAloud("全站音频已关闭，期待您的下次体验！")
                 }
             });
             // 跳动音符end
@@ -211,11 +209,10 @@
             $(".navto-search a").click(function () {
                 if (searchShow) {
                     $('.header').css('z-index', '11');
-                    searchShow = false;
                 } else {
                     $('.header').css('z-index', '10');
-                    searchShow = true;
                 }
+                searchShow = !searchShow
                 $(".site-search.active.pc").toggle();
                 $(".site-search.active.pc").find('input').focus();
             });
@@ -233,12 +230,6 @@
                 $(".nav ul.music-nav > li").addClass("on");
                 $(".mod-header_music-icon").addClass('hover');
             }
-        },
-        // 语音播报
-        readingAloud: function (data) {
-            new Audio(
-                'https://tts.baidu.com/text2audio?cuid=baiduid&lan=zh&ctp=1&pdt=311&tex=' + data
-            ).play();
         },
         //文章分类没有资源时候404提示
         isNotResources: function () {
@@ -745,9 +736,9 @@
             //移动端头部下拉搜索end
 
             // 移动端二级菜单导航start
-            $("ul.slide-left li.menu-item-type-custom a").on("touchstart", function (event) {
-                $(this).parents('li').siblings('li').find('.slide_slect').slideUp();
-                $(this).parents('li').siblings('li').find('.iconfont_click').removeClass('icon-shangjiantou').addClass('icon-xiajiantou');
+            $(".os-herder").on("touchstart", 'ul.slide-left li:has(.slide_slect) > a', function (event) {
+                $(this).parent().siblings('li').find('.slide_slect').slideUp();
+                $(this).parent().siblings('li').find('.iconfont_click').removeClass('icon-shangjiantou').addClass('icon-xiajiantou');
 
                 $(this).siblings(".slide_slect").stop().slideToggle();
                 $(this).parent().find(".iconfont_click").toggleClass("icon-xiajiantou icon-shangjiantou");
@@ -758,17 +749,36 @@
         },
         // PC端执行函数
         pcFnAll: function () {
-            // 底部悬浮登录注册start
-            // if (localStorage.getItem("off_login") != 1) {
-            //     setTimeout(() => {
-            //         $(".login_alert").slideDown();
-            //     }, 1000)
-            // }
+            // 顶部加载进度条
+            $("header .speed_bar").css({'width':'80%','transition':'width 2s'})
+            window.onload = function(){
+                $("header .speed_bar").css({'width':'100%','transition':'width 0.5s'})
+            }
+
             $(".login_alert_close").click(() => {
                 $(".login_alert").slideUp();
-                localStorage.setItem("off_login", 1)
             })
             // 底部悬浮登录注册end
+
+            // 二级菜单下拉列表个数兼容无限
+            var time = 50;
+            $(".nav ul.music-nav li .sub-menu").each(function (i) {
+                $(this).find('li').each(function (i) {
+                    $(this).css("transition-delay", i * time + 'ms')
+                })
+            })
+
+            $(".nav ul.music-nav li").hover(function () {
+                var that = $(this);
+                $(this).find('.sub-menu li').each(function (i) {
+                    $(this).css("transition-delay", (that.find('.sub-menu li').length * time - i * time) + 'ms')
+                })
+            }, function () {
+                $(this).find('.sub-menu li').each(function (i) {
+                    $(this).css("transition-delay", i * time + 'ms')
+                })
+            })
+
 
             //文章分类没有资源时候404提示
             if ($(".continar-left .article_not").length > 0) {

@@ -254,11 +254,6 @@
 								location.href="/wp-login.php"
 							}
 						})
-						if (localStorage.getItem("off_y") == 1) {
-							new Audio(
-									'https://tts.baidu.com/text2audio?cuid=baiduid&lan=zh&ctp=1&pdt=311&tex=' + 'Sorry，当前分类下没有一篇文章，是否去后台发布？'
-							).play();                        
-						}
 					}); 
 
 				</script>
@@ -284,7 +279,7 @@
 								<i class="iconfont icon-guanbi"></i>
 						</div>
 							<div class="login_alert_box">
-								<div>程序世界并不孤单，我们一路同行相伴，注册会员分享你的前端经验，赶紧来试试~
+								<div><?php echo get_option('weipxiu_options')['tips_sentence']; ?>
 											<a href="/wp-login.php" rel="nofollow">会员登录</a>
 											<span>或</span>
 											<a href="/wp-login.php?action=register" class="register" rel="nofollow">注册会员</a> 
@@ -322,13 +317,6 @@ $(function () {
 															window.open("https://jq.qq.com/?_wv=1027&k=aU2c7W76")
 															notification.close();
 													}
-													layer.ready(function(){
-															if (localStorage.getItem("off_y") == 1) {
-																	new Audio(
-																			'https://tts.baidu.com/text2audio?cuid=baiduid&lan=zh&ctp=1&pdt=311&tex=您有一条新的消息，请注意查收！'
-																	).play();
-															}
-													}) 
 											}
 									}
 

@@ -121,27 +121,6 @@ function themeoptions_page() {
         </div>
 
         <div class="row clearfix">
-          <label class="fl left-wrap">登录注册入口：</label>
-          <div class="fr right-wrap">
-            <label for="reg-flake_on">开</label>
-            <input
-              type="radio"
-              id="reg-flake_on"
-              name="logo-flake"
-              value="on" <?php if($a_options['login_reg'] == 'on') echo 'checked'; ?>
-            >
-            <label for="reg-flake_off">关</label>
-            <input
-              type="radio"
-              id="reg-flake_off"
-              name="logo-flake"
-              value="off" <?php if($a_options['login_reg'] == 'off' || $a_options['login_reg'] == '') echo 'checked'; ?>
-            >
-            <span class="warn">*非登陆状态下，移动端侧边栏展示，PC仅首页展示</span>
-          </div>
-        </div>
-
-        <div class="row clearfix">
           <label class="fl left-wrap">雪花背景特效：</label>
           <div class="fr right-wrap">
             <label for="snow-flake_on">开</label>
@@ -220,6 +199,39 @@ function themeoptions_page() {
               value="off" <?php if($a_options['switch_https'] == 'off' || $a_options['switch_https'] == '') echo 'checked'; ?>
             >
             <span class="warn">*所有资源强制以https方式加载，必须确保网站支持https</span>
+          </div>
+        </div>
+
+        <div class="row clearfix">
+          <label class="fl left-wrap">登录注册入口：</label>
+          <div class="fr right-wrap">
+            <label for="reg-flake_on">开</label>
+            <input
+              type="radio"
+              id="reg-flake_on"
+              name="logo-flake"
+              value="on" <?php if($a_options['login_reg'] == 'on') echo 'checked'; ?>
+            >
+            <label for="reg-flake_off">关</label>
+            <input
+              type="radio"
+              id="reg-flake_off"
+              name="logo-flake"
+              value="off" <?php if($a_options['login_reg'] == 'off' || $a_options['login_reg'] == '') echo 'checked'; ?>
+            >
+            <span class="warn">*非登陆状态下，移动端侧边栏展示，PC仅首页展示</span>
+          </div>
+        </div>
+        <div class="row clearfix reg_flake_show" style="display:none">
+          <label class="fl left-wrap">入口提示文案：</label>
+          <div class="fr right-wrap">
+            <input  
+                type="text"
+                class="url-inp"
+                name="tips_sentence"
+                id="tips_sentence" 
+                value="<?php echo $a_options['tips_sentence']; ?>"
+                placeholder="程序世界并不孤单，我们一路同行相伴，注册会员分享你的前端经验，赶紧来试试~"></input>
           </div>
         </div>
 
@@ -643,6 +655,8 @@ function themeoptions_page() {
           <label for="leaving-message" class="fl left-wrap">留言板寄语：</label>
           <div class="fr right-wrap">
             <textarea id="leaving-message" name="leaving-message" rows="5" cols="100" placeholder="例如：&#10;&lt;p&gt;留言板寄语&lt;/p&gt;"><?php echo $a_options['leaving_message'] ?></textarea>
+            <span class="warn">*想要启用“留言板”页面，需要在后台 > 页面 > 新建页面，指定该页面模板为"给我留言"，最后添加到菜单即可。
+            </span>
           </div>
         </div>
       </div>
@@ -695,7 +709,7 @@ function themeoptions_page() {
           <label for="time-machine" class="fl left-wrap">数据：</label>
           <div class="fr right-wrap">
             <textarea id="time-machine" name="time-machine" rows="20" cols="100" placeholder="例如：&#10;[{time: '时间', text:'文案'}]"><?php echo $a_options['time_machine'] ?></textarea>
-            <span class="warn">*该功能仅供作者使用，暂不对外开放，如有需要，自行更改源码获取拓展
+            <span class="warn">*想要启用“时光机”页面，需要在后台 > 页面 > 新建页面，指定该页面模板为"时光机"，最后添加到菜单即可。可记录网站历程，又或当作说说、朋友圈记录生活琐碎。
             </span>
           </div>
         </div>
@@ -722,6 +736,7 @@ function themeoptions_page() {
       'friendlinks' => $_POST['friend-links'],
       'aside_count' => $_POST['aside-count'],
       'switch_https' => $_POST['switch_https'],
+      'tips_sentence' => $_POST['tips_sentence'],
       'replace_skin' => $_POST['replace-skin'],
       'side_video' => $_POST['side_video'],
       'video_url' => $_POST['video_url'],

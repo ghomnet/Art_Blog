@@ -16,10 +16,10 @@ jQuery(function () {
 
   //记录选中在哪个选项卡下的状态
   var $index = localStorage.getItem("active_index") ? Number(localStorage.getItem("active_index")) : 0;
-  var domain_name = window.location.protocol + "//" + window.location.host;
-  if (domain_name.indexOf('weipxiu.com') == '-1') {
-    jQuery('.nav-wrap .nav-list:last').hide()
-  }
+  // var domain_name = window.location.protocol + "//" + window.location.host;
+  // if (domain_name.indexOf('weipxiu.com') == '-1') {
+  //   jQuery('.nav-wrap .nav-list:last').hide()
+  // }
   jQuery('.nav-wrap .nav-list').eq($index).addClass('on').siblings().removeClass('on');
   jQuery('.content-wrap').eq($index).show().siblings('.content-wrap').hide();
 
@@ -29,6 +29,19 @@ jQuery(function () {
     jQuery(this).addClass('on').siblings().removeClass('on');
     jQuery('.content-wrap').eq(jQuery(this).index()).show().siblings('.content-wrap').hide();
   });
+
+  //判断登录注册入口开关是否打开
+  if (jQuery("#reg-flake_on").is(':checked')) {
+    jQuery(".reg_flake_show").css("display", 'block');
+  } else {
+    jQuery(".reg_flake_show").css("display", 'none');
+  };
+  jQuery("#reg-flake_on").click(function () {
+    jQuery(".reg_flake_show").slideDown();
+  })
+  jQuery("#reg-flake_off").click(function () {
+    jQuery(".reg_flake_show").slideUp();
+  })
 
   //判断侧边栏热门标签开关是否打开
   if (jQuery(".popular_on").is(':checked')) {
