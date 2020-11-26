@@ -2,15 +2,13 @@
 <html lang="en">
 
 <head>
-<title>
-	<?php
-		$name = wp_title( '-', true, 'right' );
+<meta name='generator' content='WordPress/Art_Blog v2020-11-24 13:50:39'>
+<title><?php $name = wp_title( '-', true, 'right' );
 		if ($name) {
 			echo $name . "&nbsp;-&nbsp;" . get_bloginfo('description');
 		} else {
 			echo get_bloginfo('name');
-		}
-	?>
+		}?>
 </title>
 <link rel="stylesheet" type="text/css" href="<?php echo esc_url(get_template_directory_uri()); ?>/css/swiper.min.css">
 <?php get_template_part('common'); ?>
