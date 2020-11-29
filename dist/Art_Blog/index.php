@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<meta name='generator' content='WordPress/Art_Blog v2020-11-24 13:50:39'>
+<meta name='generator' content='WordPress/Art_Blog v2020-11-27 15:50:07'>
 <title><?php $name = wp_title( '-', true, 'right' );
 		if ($name) {
 			echo $name . "&nbsp;-&nbsp;" . get_bloginfo('description');
@@ -182,12 +182,7 @@
 						</div>
 						<div class="img-left">
 							<a class="read-more" href="<?php the_permalink(); ?>" target="_blank">
-								<?php
-									if (has_post_thumbnail())
-									echo _get_post_thumbnail();
-								else
-									echo "<img src='". catch_that_image()."'"." alt='".get_the_title()."'>";
-								?>
+								<?php echo _get_post_thumbnail(); ?>
 							</a>
 						</div>
 						<div class="text_right">
@@ -197,12 +192,7 @@
 								<a href="<?php the_permalink(); ?>" target="_blank">
 									<?php the_title(); ?></a>
 							</h2>
-							<?php
-									if (has_post_thumbnail())
-									echo _get_post_thumbnail();
-								else
-									echo "<img src='". catch_that_image()."'"." alt='".get_the_title()."'>";
-							?>
+							<?php echo _get_post_thumbnail(); ?>
 							<h3>
 									<?php if (has_excerpt()) {
 											//文章编辑中的摘要
@@ -232,7 +222,7 @@
 				<script>
 					$("body, html").css("height","100%");
 					$(".search_404").show();
-					if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+					if ($(window).width() < 1200) {
 						setTimeout(function(){
 							$('footer.footer').css({
 									"position": "fixed",
@@ -300,7 +290,7 @@
 $(function () {
 			//var domain_name = window.location.origin;//https://www.weipxiu.com（不兼容IE10及以下）
 			var domain_name = window.location.protocol + "//" + window.location.host;
-			if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+			if (!($(window).width() < 1200)) {
 					// 桌面提醒功能
 					var set_desktop = function () {
 							if (window.Notification) {

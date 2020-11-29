@@ -1163,6 +1163,7 @@
 		position: absolute;
 		right: 0px;
 		top: 19px;
+		transition: top .25s;
 	}
 
 	.navto-search a {
@@ -1677,6 +1678,10 @@
 		-webkit-transform: translate3d(0, 0px, 0);
 		transform: translate3d(0, 0px, 0);
 		position: relative;
+	}
+
+	.continar-left > article.text:last-of-type{
+		margin-bottom: 0;
 	}
 
 	.text .mod-category__article-time {
@@ -6090,7 +6095,7 @@
 		padding: 7px 0;
 		color: #666;
 		border-bottom: 1px solid #f1f1f1;
-		margin: 15px 0;
+		margin-top: 10px;
 		text-align: center;
 		background: #f0f2f7;
 	}
@@ -6105,20 +6110,18 @@
 
 	#reply-title {
 		font-size: 14px;
-		color: #666;
 		border-bottom: 0;
 		color: #999;
 		position: relative;
-		margin: 0;
-		border-bottom: 3px solid #fff;
 	}
 
-	#reply-title a {
-		color: #6a82fb;
-	}
-
-	#reply-title #cancel-comment-reply-link {
+	#reply-title a{
 		color: #999;
+	}
+
+	#reply-title small a {
+		color: #1890ff;
+		color: var(--color);
 	}
 
 	textarea#comment {

@@ -7,7 +7,7 @@
     App.prototype = {
         init: function () {
             // 终端独立事件方法
-            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+            if ($(window).width() < 1200) {
                 // 移动端执行函数
                 this.mobileFnAll();
             } else {
@@ -18,6 +18,8 @@
                 // 随机文章列表钢琴效果
                 this.stringEffect();
             }
+            // 网页顶部加载进度条
+            this.loadBar();
             //头部3D导航DOM改造
             this.navReform();
             // 3D导航跳动音符
@@ -70,7 +72,7 @@
             $(".header .sub-menu").addClass('nav-min');
             $(".os-herder .sub-menu").addClass('slide_slect');
             //追加音乐开关
-            var dom_node = "<li id='backstage' style='display:none'><a href='/wp-admin/' target='_blank'><span>后台管理</span><span>后台管理</span></a><p></p>"+ "<audio src='' autoplay='autoplay'></audio>"+"</li>"+"<li class='js_piano_nav_icon mod-header_music-icon'>" + "<audio src='' autoplay='autoplay'></audio>" + "<i></i><i></i><i></i><i></i><i></i></li>"
+            var dom_node = "<li id='backstage' style='display:none'><a href='/wp-admin/' target='_blank'><span>后台管理</span><span>后台管理</span></a><p></p>" + "<audio src='' autoplay='autoplay'></audio>" + "</li>" + "<li class='js_piano_nav_icon mod-header_music-icon'>" + "<audio src='' autoplay='autoplay'></audio>" + "<i></i><i></i><i></i><i></i><i></i></li>"
             $(".header .music-nav").append(dom_node);
         },
         // 3D导航跳动音符
@@ -393,6 +395,15 @@
                 })
             }
 
+            // 滚动页面设置
+            var offset_left = $('.continar-right').offset() && $('.continar-right').offset().left;
+            function elementInView(element) {
+                const rect = element.getBoundingClientRect()
+                const y = rect.top < window.innerHeight && rect.bottom > 0
+                const x = rect.left < window.innerWidth && rect.right > 0
+                return y && x
+            }
+
             function scroll_height() {
                 scrollTop = $(document).scrollTop();
                 if (scrollTop > 500) {
@@ -413,12 +424,31 @@
                     $(".header").removeClass("Top")
                     $(".header").addClass("hover")
                 }
+                // 右侧区域跟随
+                var roll_obj = $('.continar-right');
+                if ($(window).width() > 1200 && roll_obj.length) {
+                    offset_left = $('.continar-right').offset().left;
+                    if (
+                        (elementInView($(".continar-right > div:last-of-type")[0]) || (scrollTop > roll_obj.outerHeight()))
+                        && !(elementInView($(".footer")[0]))
+                    ) {
+                        if (scrollTop > roll_obj.outerHeight() - $(window).height() + $(".continar-right > div:last-of-type").outerHeight() - 100) {
+                            roll_obj.css({ "position": "fixed", "bottom": "0", "left": offset_left + "px" });
+                        } else {
+                            roll_obj.css({ "position": "static", "bottom": "auto", "left": "auto" });
+                        }
+                    } else if (elementInView($(".footer")[0]) && ($('.continar-left').outerHeight() >= roll_obj.outerHeight())) {
+                        roll_obj.css({ "position": "fixed", "bottom": 25 + $(".footer").outerHeight() + "px", "left": offset_left + "px" });
+                    }
+                }
             }
             scroll_height()
             $(document).scroll(function () {
-                scroll_height()
+                scroll_height();
             });
-
+            window.onresize = function () {
+                scroll_height();
+            }
         },
         // 在线客服
         customerService: function () {
@@ -654,11 +684,11 @@
         },
         // 文章详情页底部评论区域样式兼容
         commentStyle: function () {
-            setTimeout(function () {
-                if ($("#reply-title a").is(":hidden")) {
-                    $("#reply-title").hide();
-                }
-            })
+            if ($("#cancel-comment-reply-link").css('display') != 'none') {
+                $("#reply-title").show();
+            } else {
+                $("#reply-title").hide();
+            }
         },
         // 移动端执行函数
         mobileFnAll: function () {
@@ -747,13 +777,14 @@
             })
             // 移动端二级菜单导航end
         },
+        // 网页顶部加载进度条
+        loadBar: function () {
+            window.onload = function () {
+                $("header .speed_bar").css({ 'animation': 'speed_bar_animation_complete .5s ease-out', 'animation-fill-mode': 'forwards' })
+            }
+        },
         // PC端执行函数
         pcFnAll: function () {
-            // 顶部加载进度条
-            window.onload = function(){
-                $("header .speed_bar").css({'animation':'speed_bar_animation_complete .5s ease-out','animation-fill-mode':'forwards'})
-            }
-
             // 登录注册悬浮入口
             $(".login_alert_close").click(() => {
                 $(".login_alert").slideUp();
