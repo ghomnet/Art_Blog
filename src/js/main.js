@@ -20,6 +20,8 @@
             }
             // 网页顶部加载进度条
             this.loadBar();
+            // 信息流图片懒加载
+            this.informationLazy_load();
             //头部3D导航DOM改造
             this.navReform();
             // 3D导航跳动音符
@@ -46,6 +48,36 @@
             this.randomArticles();
             // 文章详情页底部评论区域样式兼容
             this.commentStyle();
+        },
+        // 网页顶部加载进度条
+        loadBar: function () {
+            window.onload = function () {
+                $("header .speed_bar").css({ 'animation': 'speed_bar_animation_complete .5s ease-out', 'animation-fill-mode': 'forwards' })
+            }
+        },
+        // dom是否在可视区内
+        elementInView: function (element) {
+            const rect = element.getBoundingClientRect()
+            const y = rect.top < window.innerHeight && rect.bottom > 0
+            const x = rect.left < window.innerWidth && rect.right > 0
+            return y && x
+        },
+        // 信息流图片懒加载
+        informationLazy_load: function () {
+            var that = this;
+            function lazy_load(){
+                var imgList = document.querySelectorAll(".continar-left .text img");
+                for (var i = 0; i < imgList.length; i++) {
+                    if (that.elementInView(imgList[i]) && imgList[i].getAttribute('data-original')) {
+                        imgList[i].setAttribute('src', imgList[i].getAttribute('data-original'));
+                        imgList[i].removeAttribute('data-original');
+                    }
+                }
+            }
+            lazy_load();
+            $(document).scroll(function () {
+                lazy_load();
+            });
         },
         // 头部3D导航DOM改造
         navReform: function () {
@@ -79,7 +111,6 @@
         navPianoEffect: function () {
             //PC二级菜单，钢琴导航start
             var that = this;
-            var time1 = null;
             var time2 = null;
             var $index = null;
             var musicObj = null;
@@ -88,12 +119,11 @@
                 $(this).css("z-index", "12");
             }, function () {
                 //如果出现搜索的情况下，头部层级自然还是要比轮播高
-                clearTimeout(time1);
                 if (!time2 && !$(".site-search").is(":visible")) {
-                    time1 = setTimeout(() => {
-                        //避免在正常时候下方轮播分割旋转时候被遮盖 
-                        $(".header").css("z-index", "10");
-                    }, 500);
+                    //避免在正常时候下方轮播分割旋转时候被遮盖 
+                    $(".header").css("z-index", "10");
+                } else {
+                    $(".header").css("z-index", "12");
                 }
             })
 
@@ -121,11 +151,11 @@
                     }, 250)
                 }
                 //避免在正常时候下方轮播分割旋转时候被遮盖 
-                if (!$(".site-search").is(":visible")) {
-                    time2 = setTimeout(() => {
+                time2 = setTimeout(() => {
+                    if (!$(".site-search").is(":visible")) {
                         $(".header").css("z-index", "10");
-                    }, 1000)
-                }
+                    }
+                }, 1000)
             })
 
             function musicdown(number) {
@@ -138,13 +168,12 @@
 
             // 键盘按下
             $(document).keydown(function (event) {
-                if (localStorage.getItem("off_y") == 1) {
-                    //a65 s83 d68 f70 g71 h72 j74 k75 l76
-                    var keyArr = [65, 83, 68, 70, 71, 72, 74, 75, 76]
-                    var _index = keyArr.indexOf(event.keyCode)
-                    if (_index >= 0) {
-                        musicdown(_index + 1)
-                    }
+                if (localStorage.getItem("off_y") != 1) return;
+                //a65 s83 d68 f70 g71 h72 j74 k75 l76
+                var keyArr = [65, 83, 68, 70, 71, 72, 74, 75, 76]
+                var _index = keyArr.indexOf(event.keyCode)
+                if (_index >= 0) {
+                    musicdown(_index + 1)
                 }
             });
             $(document).keyup(function () {
@@ -294,13 +323,11 @@
                     }
 
                     var typePrefixMethod = typeof element[prefix + method];
-
-                    if (typePrefixMethod + "" !== "undefined") {
-                        if (typePrefixMethod === "function") {
-                            usablePrefixMethod = element[prefix + method]();
-                        } else {
-                            usablePrefixMethod = element[prefix + method];
-                        }
+                    if (typePrefixMethod + "" == "undefined") return;
+                    if (typePrefixMethod === "function") {
+                        usablePrefixMethod = element[prefix + method]();
+                    } else {
+                        usablePrefixMethod = element[prefix + method];
                     }
                 });
 
@@ -359,6 +386,7 @@
         },
         //纸飞机
         paperPlane: function () {
+            var that = this;
             $(".aircraft").click(function () {
                 $(this).animate({
                     "bottom": "0",
@@ -396,14 +424,7 @@
             }
 
             // 滚动页面设置
-            var offset_left = $('.continar-right').offset() && $('.continar-right').offset().left;
-            function elementInView(element) {
-                const rect = element.getBoundingClientRect()
-                const y = rect.top < window.innerHeight && rect.bottom > 0
-                const x = rect.left < window.innerWidth && rect.right > 0
-                return y && x
-            }
-
+            var offset_left = null;
             function scroll_height() {
                 scrollTop = $(document).scrollTop();
                 if (scrollTop > 500) {
@@ -427,18 +448,20 @@
                 // 右侧区域跟随
                 var roll_obj = $('.continar-right');
                 if ($(window).width() > 1200 && roll_obj.length) {
-                    offset_left = $('.continar-right').offset().left;
+                    offset_left = $('.continar-left').offset().left + $('.continar-left').outerWidth() + 10;
                     if (
-                        (elementInView($(".continar-right > div:last-of-type")[0]) || (scrollTop > roll_obj.outerHeight()))
-                        && !(elementInView($(".footer")[0]))
+                        (that.elementInView($(".continar-right > div:last-of-type")[0]) || (scrollTop > roll_obj.outerHeight()))
+                        && !(that.elementInView($(".footer")[0]))
                     ) {
-                        if (scrollTop > roll_obj.outerHeight() - $(window).height() + $(".continar-right > div:last-of-type").outerHeight() - 100) {
+                        if (scrollTop > roll_obj.outerHeight() - $(window).height() + $(".continar-right > div:last-of-type").outerHeight() - 100 && ($('.continar-left').outerHeight() >= roll_obj.outerHeight())) {
                             roll_obj.css({ "position": "fixed", "bottom": "0", "left": offset_left + "px" });
                         } else {
                             roll_obj.css({ "position": "static", "bottom": "auto", "left": "auto" });
                         }
-                    } else if (elementInView($(".footer")[0]) && ($('.continar-left').outerHeight() >= roll_obj.outerHeight())) {
-                        roll_obj.css({ "position": "fixed", "bottom": 25 + $(".footer").outerHeight() + "px", "left": offset_left + "px" });
+                    } else if (that.elementInView($(".footer")[0]) && ($('.continar-left').outerHeight() >= roll_obj.outerHeight())) {
+                        // 当出现底部时候，始终和左侧水平对齐
+                        var position_bot = $(window).height() - ($(".continar-left").outerHeight() + ($(".continar-left").offset().top - $(document).scrollTop())); // 拿到“.continar-left”相对于屏幕底部的距离
+                        roll_obj.css({ "position": "fixed", "bottom": position_bot + "px", "left": offset_left + "px" });
                     }
                 }
             }
@@ -692,15 +715,6 @@
         },
         // 移动端执行函数
         mobileFnAll: function () {
-            //特色图片懒加载，移动端需要设置滚动事件，在资源完全加载后执行
-            setTimeout(() => {
-                $("img.Lazy_load").lazyload({
-                    container: $("body > .continar"),
-                    threshold: 100,
-                    effects: "show"
-                });
-            }, 300)
-
             var obtn = true;
             $(".btn_menu,.cover").on("touchmove", function (event) {
                 event.preventDefault();
@@ -777,12 +791,6 @@
             })
             // 移动端二级菜单导航end
         },
-        // 网页顶部加载进度条
-        loadBar: function () {
-            window.onload = function () {
-                $("header .speed_bar").css({ 'animation': 'speed_bar_animation_complete .5s ease-out', 'animation-fill-mode': 'forwards' })
-            }
-        },
         // PC端执行函数
         pcFnAll: function () {
             // 登录注册悬浮入口
@@ -815,11 +823,6 @@
             if ($(".continar-left .article_not").length > 0) {
                 $("body > .continar").css({ "height": "calc(100% - 280px)" });
             }
-
-            // 特色图片懒加载
-            $("img.Lazy_load").lazyload({
-                effect: "show"
-            });
 
             // 鼠标默认右键功能start
             document.oncontextmenu = function (ev) {
